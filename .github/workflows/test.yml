@@ -15,14 +15,14 @@ jobs:
     steps:
       - name: print os
         run: | 
-          echo "The operating system is " + $RUNNER_OS + "."  
-          echo "MY_RUNNER_OS=" + $RUNNER_OS >> "$GITHUB_ENV"
-          echo "MY_RUNNER_OS=" + $RUNNER_OS >> "$GITHUB_OUTPUT"
-          echo "My runner os is " + $MY_RUNNER_OS + "."
+          echo 'The operating system is ' + $RUNNER_OS + '.'  
+          echo 'MY_RUNNER_OS=" + $RUNNER_OS >> '$GITHUB_ENV'
+          echo 'MY_RUNNER_OS=" + $RUNNER_OS >> '$GITHUB_OUTPUT'
+          echo 'My runner os is ' + $MY_RUNNER_OS + '.'
   foo-job-two:
     name: Another test job
     needs: runnerjob
     runs-on: ubuntu-latest
     steps:
       - name: Print out env variable from runnerjob
-        run: echo "${{ needs.runnerjob.outputs.my_runner_os }}"
+        run: echo "${{ needs.runner_job.outputs.my_runner_os }}"
