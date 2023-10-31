@@ -7,17 +7,22 @@ env:
   foo: bar
 
 jobs:
-  foo-job:
-    name: Test job
-    runs-on: ubuntu-latest
+  if-Windows-else:
+    runs-on: macos-latest
     steps:
+      - name: condition 1
+        if: runner.os == 'Windows'
+        run: echo "The operating system on the runner is $env:RUNNER_OS."
+      - name: condition 2
+        if: runner.os != 'Windows'
+        run: echo "The operating system on the runner is not Windows, it's $RUNNER_OS."  
       - name: Step 1
-        run: echo ("BRANCH_NAME=" + $env:GITHUB_REF) >> $env:GITHUB_ENV
+        run: echo ("MY_RUNNER_OS=" + $env:RUNNER_OS) >> $env:GITHUB_ENV
       - name: Print branch name
-        run: echo "${{ env.BRANCH_NAME }}"
+        run: echo "${{ env.MY_RUNNER_OS }}"
   foo-job-two:
     name: Another test job
     runs-on: ubuntu-latest
     steps:
       - name: Print out env variable from foo-job
-        run: echo $env.BRANCH_NAME
+        run: echo echo "${{ env.MY_RUNNER_OS }}"
