@@ -7,19 +7,21 @@ env:
   foo: bar
 
 jobs:
-  if-Windows-else:
+  runnerjob:
     runs-on: ubuntu-latest
     steps:
-      - name: condition 1
-        run: echo "The operating system is $env:RUNNER_OS."  
-      - name: Set env var
-        run: echo "MY_RUNNER_OS=" + $RUNNER_OS >> "$GITHUB_ENV"
-      - name: Print os name
-        run: echo "$MY_RUNNER_OS"
+      - name: print os
+        run: | 
+          echo "The operating system is $env:RUNNER_OS."  
+          echo "MY_RUNNER_OS=" + $RUNNER_OS >> "$GITHUB_ENV"
+          echo "$MY_RUNNER_OS"
+          echo "::set-output name=my_runner_os::${MY_RUNNER_OS}"
+    outputs:
+      my_runner_os: ${{ steps.runnerjob.outputs.my_runner_os }}
   foo-job-two:
     name: Another test job
-    needs: if-Windows-else
+    needs: runnerjob
     runs-on: ubuntu-latest
     steps:
-      - name: Print out env variable from if-Windows-else
-        run: echo "$env:MY_RUNNER_OS"
+      - name: Print out env variable from runnerjob
+        run: echo "${{ needs.runnerjob.outputs.my_runner_os }}"
