@@ -22,4 +22,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print out env variable from if-Windows-else
-        run: echo "$MY_RUNNER_OS"
+        run: echo "$env:MY_RUNNER_OS"
