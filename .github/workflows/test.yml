@@ -17,7 +17,7 @@ jobs:
         if: runner.os != 'Windows'
         run: echo "The operating system on the runner is not Windows, it's $RUNNER_OS."  
       - name: Step 1
-        run: echo ("MY_RUNNER_OS=" + $env:RUNNER_OS) >> $env:GITHUB_ENV
+        run: echo ("MY_RUNNER_OS=" + $RUNNER_OS) >> $env:GITHUB_ENV
       - name: Print branch name
         run: echo "${{ env.MY_RUNNER_OS }}"
   foo-job-two:
