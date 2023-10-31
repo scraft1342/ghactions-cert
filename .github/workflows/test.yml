@@ -12,4 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: echo
-        run: "::debug::test debug message"
+        run: echo "::debug::test debug message"
