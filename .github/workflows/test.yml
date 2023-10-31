@@ -12,10 +12,10 @@ jobs:
     steps:
       - name: print os
         run: | 
-          echo "The operating system is $env:RUNNER_OS."  
+          echo "The operating system is $RUNNER_OS."  
           echo "MY_RUNNER_OS=" + $RUNNER_OS >> "$GITHUB_ENV"
-          echo "$MY_RUNNER_OS"
-          echo "::set-output name=my_runner_os::${MY_RUNNER_OS}"
+          echo "MY_RUNNER_OS=" + $RUNNER_OS >> "$GITHUB_OUTPUT"
+          echo "My runner os is $MY_RUNNER_OS"
     outputs:
       my_runner_os: ${{ steps.runnerjob.outputs.my_runner_os }}
   foo-job-two:
