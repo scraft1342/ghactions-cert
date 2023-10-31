@@ -1,0 +1,25 @@
+name: GitHub Actions Sandbox
+
+on:
+  workflow_dispatch
+
+env:
+  foo: bar
+
+jobs:
+  foo-job:
+    name: Test job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1
+        run: |
+          chcp 65001 #set code page to utf-8
+          echo ("BRANCH_NAME=" + $env:GITHUB_REF.replace('refs/heads/', '')) >> $env:GITHUB_ENV
+      - name: Print branch name
+        run: echo "${{ env.BRANCH_NAME }}"
+  foo-job-two:
+    name: Another test job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print out env variable from foo-job
+        run: echo $env.BRANCH_NAME
