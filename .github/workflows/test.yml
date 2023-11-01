@@ -4,12 +4,16 @@ on:
   workflow_dispatch
 
 env:
-  foo: bar
+  DAY_OF_WEEK: Wednesday
 
 jobs:
-  jobone:
-    name: job_one
+  greeting_job:
     runs-on: ubuntu-latest
+    env:
+      Greeting: Hello
     steps:
-      - name: echo
-        run: echo "::debug::test debug message"
+      - name: "Say Hello Sam it's Wednesday"
+        if: ${{ env.DAY_OF_WEEK == 'Wednesday' }}
+        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+        env:
+          First_Name: Sam
